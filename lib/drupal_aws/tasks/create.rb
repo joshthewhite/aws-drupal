@@ -63,7 +63,7 @@ module DrupalAws
         archive = 'drupal-puppet-config.zip'
         archive_path = "#{@data_dir}/puppet/#{archive}"
         File.delete(archive_path) if File.exist?(archive_path)
-        zf = Utils::ZipFileGenerator.new('./puppet/content', archive_path)
+        zf = Utils::ZipFileGenerator.new("#{@data_dir}/puppet/content", archive_path)
         zf.write { |file| puts "Deflating #{file}" }
 
         # These are all the files needed to complete the installation.
