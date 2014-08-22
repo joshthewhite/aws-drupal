@@ -1,0 +1,7 @@
+.bundle
+Gemfile.lock
+config.yml
+puppet/*.zip
+*.iml
+.idea
+*.bak
