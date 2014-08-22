@@ -5,3 +5,4 @@ puppet/*.zip
 *.iml
 .idea
 *.bak
+.DS_Store
