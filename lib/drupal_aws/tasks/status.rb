@@ -24,13 +24,17 @@ module DrupalAws
         ec2 = AWS::EC2.new
 
         # Loop through looking for the "drupal" stack.
+        puts 'Looking for a Drupal stack.' if @options[:verbose]
         stack = cfm.stacks.detect { |stack| /drupal-WebServer/.match(stack.name) }
 
         if stack.nil? or !stack.exists?
-          puts 'The stack is down :('
+          puts 'The Drupal stack could not be found.'
           exit 1
         end
 
+        puts "Found a Drupal stack named '#{stack.name}'" if @options[:verbose]
+
+        puts 'Looking for a web server in the stack.' if @options[:verbose]
         resource = stack.resources.detect do |resource|
           resource.logical_resource_id == 'PuppetClient'
         end
@@ -40,8 +44,12 @@ module DrupalAws
           exit 1
         end
 
+        puts "Found a web server with id '#{resource.physical_resource_id}'" if @options[:verbose]
+
         web_server = ec2.instances[resource.physical_resource_id]
         host = web_server.dns_name
+
+        puts "Checking for a running Drupal instance at http://#{host}/" if @options[:verbose]
 
         uri = URI.parse("http://#{host}/")
         res = Net::HTTP.get_response(uri)
@@ -49,6 +57,7 @@ module DrupalAws
           puts 'The site is up.'
           exit 0
         else
+          puts "Got response code: #{res.code}" if @options[:verbose]
           puts 'The site is down!'
           exit 1
         end
@@ -58,14 +67,14 @@ module DrupalAws
 
       def option_parser
         OptionParser.new do |opts|
-          opts.banner = 'Usage: drupal_aws create [options]'
-
-          opts.on('-e', '--email [EMAIL]', 'Notification email address') do |e|
-            @options[:email] = e
-          end
+          opts.banner = 'Usage: drupal_aws status [options]'
 
           opts.on('-h', 'Display this help message') do |h|
             @options[:help] = true
+          end
+
+          opts.on('-v', 'Enable verbose logging') do |v|
+            @options[:verbose] = true
           end
         end
       end

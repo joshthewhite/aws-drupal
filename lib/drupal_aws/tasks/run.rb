@@ -11,6 +11,8 @@ module DrupalAws
             target_object = Tasks::Create.new
           when 'status'
             target_object = Tasks::Status.new
+          when 'destroy'
+            target_object = Tasks::Destroy.new
           when 'help', '-h'
             print_help
             exit 0
