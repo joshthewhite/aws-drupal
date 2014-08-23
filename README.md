@@ -23,4 +23,4 @@ for more information on getting your keys.
 
 ## Running the S3 sample
 
-    ruby drupal.rb
+    bin/drupal_aws

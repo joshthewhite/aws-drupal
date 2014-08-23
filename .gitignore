@@ -1,7 +1,7 @@
 .bundle
 Gemfile.lock
 config.yml
-puppet/*.zip
+data/puppet/*.zip
 *.iml
 .idea
 *.bak
