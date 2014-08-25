@@ -102,7 +102,7 @@ module DrupalAws
           File.open(key_pair_file, 'wb') do |f|
             f.write(key_pair.private_key)
           end
-          File.chmod(0644, key_pair_file)
+          File.chmod(0600, key_pair_file)
           puts "Created new private key file at: #{key_pair_file}"
         end
 

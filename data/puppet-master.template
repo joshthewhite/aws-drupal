@@ -217,7 +217,7 @@
             "Description" : "DNS Name of PuppetMaster"
         },
         "PuppetClientSecurityGroup" : {
-            "Value" : { "Ref" : "EC2SecurityGroup" },
+            "Value" : { "Fn::GetAtt" : [ "EC2SecurityGroup", "GroupId" ] },
             "Description" : "Clients of the Puppet Master should be part of this security group"
         }
     }

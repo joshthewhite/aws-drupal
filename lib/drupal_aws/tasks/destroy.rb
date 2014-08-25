@@ -86,20 +86,20 @@ module DrupalAws
         ##
         # Delete the Cloud Formation Drupal stack.
         ##
-        master_stack = cfm.stacks['puppet-master']
-        if master_stack.exists?
-          print 'Deleting the Puppet Master stack (this could take a while) ... '
-          master_stack.delete
+        drupal_stack = cfm.stacks['drupal']
+        if drupal_stack.exists?
+          print 'Deleting the Puppet Web Server stack ... '
+          drupal_stack.delete
           print "Done!\n"
         end
 
         ##
         # Delete the Cloud Formation Puppet Master stack.
         ##
-        drupal_stack = cfm.stacks['drupal']
-        if drupal_stack.exists?
-          print 'Deleting the Puppet Master stack (get comfortable, this takes forever) ... '
-          drupal_stack.delete
+        master_stack = cfm.stacks['puppet-master']
+        if master_stack.exists?
+          print 'Deleting the Puppet Master stack ... '
+          master_stack.delete
           print "Done!\n"
         end
       end

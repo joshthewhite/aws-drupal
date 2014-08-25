@@ -1,6 +1,11 @@
 # Drupal Enterprise Installer for AWS
 
-A utility to spin up an enterprise ready Drupal instance on AWS. Documentation and cleanup coming soon.
+A utility to spin up an enterprise ready Drupal instance on AWS.
+
+## What does it do?
+
+The script uses [AWS Cloud Formation](https://aws.amazon.com/cloudformation) to create the AWS infrastructure
+and uses [Puppet](http://puppetlabs.com/) to configure the web servers created.
 
 ## Requirements
 
@@ -23,4 +28,10 @@ for more information on getting your keys.
 
 ## Running the S3 sample
 
-    bin/drupal_aws
+To create a new Drupal stack:
+
+    bin/drupal_aws create
+
+To see all options:
+
+    bin/drupal_aws help

@@ -1,7 +1,7 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
 
-    "Description": "This template uses embedded templates to build a Drupal installation with an RDS backed.",
+    "Description": "This template uses embedded templates to build a Drupal installation with an RDS backend.",
 
     "Parameters": {
         "KeyName": {
@@ -105,7 +105,7 @@
                 "Parameters" : {
                     "KeyName"                   : { "Ref" : "KeyName" },
                     "InstanceType"              : { "Ref" : "InstanceType"},
-                    "EC2SecurityGroup"          : { "Ref" : "EC2SecurityGroup" },
+                    "EC2SecurityGroup"          : { "Fn::GetAtt" : [ "EC2SecurityGroup", "GroupId" ] },
                     "PuppetClientSecurityGroup" : { "Ref" : "PuppetClientSecurityGroup" },
                     "PuppetMasterDNSName"       : { "Ref" : "PuppetMasterDNSName" },
                     "StackNameOrId"             : { "Ref" : "AWS::StackId" },
